@@ -26,7 +26,7 @@ export default {
   watch: {
       email: function(val) {
         console.log(val);
-        this.email = val;
+        this.email = val.toLowerCase();
       },
       password: function(val) {
         console.log(val);

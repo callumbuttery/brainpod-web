@@ -15,6 +15,9 @@ export default {
   components: {
     Form
   },
+  mounted() {
+    this.$store.dispatch("getHash");
+  },
 };
 </script>
 
