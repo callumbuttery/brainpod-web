@@ -35,7 +35,7 @@ export default {
     },
   methods: {
     attemptLogin(){
-    const hashPassword = sha256(this.password + this.$store.state.hash);
+    const hashPassword = sha256(this.password + this.$store.state.hash + process.env.VUE_APP_SALT).toString();
     console.log(hashPassword);
   },
   }
