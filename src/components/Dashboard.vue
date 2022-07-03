@@ -6,7 +6,7 @@
 
         <v-divider></v-divider>
 
-        <v-list nav dense>
+        <v-list nav dense>-
           <v-list-item link>
             <v-list-item-icon>
               <v-icon>mdi-folder</v-icon>
