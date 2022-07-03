@@ -3,42 +3,20 @@
     <v-card-title class="justify-center">
       <span class="text-center headline">Login</span>
     </v-card-title>
-    <Inputs/>
-    <div class="buttonsContainer">
-      <v-btn class="buttons" elevation="2" color="primary" @click="attemptLogin">Login</v-btn>
-      <v-btn class="buttons" elevation="2" color="secondary">Register</v-btn>
-    </div>
+    <Form/>
   </v-card>
 </template>
 
 <script>
 
-import Inputs from "@/components/Login/Inputs.vue";
+import Form from "@/components/Login/Form.vue";
 export default {
   name: "Login",
   components: {
-    Inputs
+    Form
   },
-  methods: {
-    attemptLogin(){
-      console.log('hitting login');
-    }
-  }
 };
 </script>
 
 <style>
-.container {
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 10%;
-}
-
-.buttonsContainer{
-  margin-left: 35%;
-}
-
-.buttons{
-  margin: 10px;
-}
 </style>
