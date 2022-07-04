@@ -15,6 +15,7 @@
 
 <script>
 import sha256 from 'crypto-js/sha256';
+import axios from 'axios';
 export default {
   name: 'Form',
   data() {
@@ -35,9 +36,20 @@ export default {
     },
   methods: {
     attemptLogin(){
-    const hashPassword = sha256(this.password + this.$store.state.hash + process.env.VUE_APP_SALT).toString();
-    console.log(hashPassword);
-  },
+      const hashPassword = hashPassword(this.password);
+    }, 
+    attemptRegistation(){
+      const hashPassword = hashPassword(this.password);
+
+      axios.post('/auth/register', {
+        email: this.email,
+        password: hashPassword,
+      })
+    },
+    }
+    hashPassword(password){
+      return sha256(password + process.env.VUE_APP_SALT).toString();
+    },
   }
 };
 </script>
