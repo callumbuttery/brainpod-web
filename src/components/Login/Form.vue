@@ -36,19 +36,17 @@ export default {
     },
   methods: {
     attemptLogin(){
-      const hashPassword = hashPassword(this.password);
+      axios.get('/api/login', {
+        email: this.email,
+        password: this.password,
+      })
     }, 
     attemptRegistation(){
-      const hashPassword = hashPassword(this.password);
 
       axios.post('/auth/register', {
         email: this.email,
-        password: hashPassword,
+        password: this.password,
       })
-    },
-    }
-    hashPassword(password){
-      return sha256(password + process.env.VUE_APP_SALT).toString();
     },
   }
 };
