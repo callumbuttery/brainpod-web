@@ -10,6 +10,7 @@ import { useState } from 'react';
 export const LoginForm: React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
+  const [password, setPass] = useState<string>('');
 
 
   return (
@@ -24,11 +25,11 @@ export const LoginForm: React.FC = () => {
         </a>
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
-            {email}
+            Sign in to your account
           </h1>
           <form className="w-4/5 mx-auto space-y-4 md:space-y-6" action="#">
             <EmailBox setEmail={setEmail} />
-            <PasswordBox />
+            <PasswordBox setPass={setPass} />
             <Signin />
             <Signup />
             <ForgotPassword />
