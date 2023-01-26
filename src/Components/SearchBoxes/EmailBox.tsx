@@ -1,7 +1,7 @@
 export const EmailBox: React.FC = () => {
   return (
-    <div className="">
-      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    <div className="hover:scale-110">
+      <label className="block mb-2 text-sm font-medium text-white">
         Your email
       </label>
       <input
