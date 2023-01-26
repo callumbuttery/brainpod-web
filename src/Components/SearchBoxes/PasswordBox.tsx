@@ -9,7 +9,7 @@ export const PasswordBox: React.FC = () => {
         name="password"
         id="password"
         placeholder="••••••••"
-        className="bg-gray-500 border-none sm:text-sm rounded-lg block w-full p-2.5"
+        className="bg-gray-500  text-white border-none sm:text-sm rounded-lg block w-full p-2.5"
       />
     </div>
   );
