@@ -5,12 +5,18 @@ import { PasswordBox } from '../SearchBoxes/PasswordBox';
 import { Signup } from '../Buttons/Signup';
 import { Signin } from '../Buttons/Signin';
 import { ForgotPassword } from '../Buttons/Forgotpassword';
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 
 export const LoginForm: React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPass] = useState<string>('');
+
+  const handleSignin = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log('button was press');
+  }
 
 
   return (
@@ -30,7 +36,7 @@ export const LoginForm: React.FC = () => {
           <form className="w-4/5 mx-auto space-y-4 md:space-y-6" action="#">
             <EmailBox setEmail={setEmail} />
             <PasswordBox setPass={setPass} />
-            <Signin />
+            <Signin onButtonClick={handleSignin}/>
             <Signup />
             <ForgotPassword />
           </form>
