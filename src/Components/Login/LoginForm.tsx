@@ -42,7 +42,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <div className="flex flex-col w-3/5 items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 drop-shadow-4xl">
-      <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gradient-to-br from-sky-500 to-blue-600 border-none">
+      <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gradient-to-br from-purple-500 to-blue-500 border-none">
         <a
           href="#"
           className="flex justify-center mb-2 mt-6 text-2xl font-semibold text-white dark:text-white"
