@@ -2,20 +2,41 @@ import Logo from '../../Images/Logo.png'
 
 import { EmailBox } from '../SearchBoxes/EmailBox';
 import { PasswordBox } from '../SearchBoxes/PasswordBox';
-import { Signup } from '../Buttons/Signup';
+import { SignUpPrompt } from '../Buttons/SignUpPrompt';
 import { Signin } from '../Buttons/Signin';
 import { ForgotPassword } from '../Buttons/Forgotpassword';
 import React, { useState } from 'react';
+import { ConfirmPass } from '../SearchBoxes/ConfirmPass';
+import { ConfirmRegister } from '../Buttons/confirmRegister';
+import { SignInPrompt } from '../Buttons/SignInPrompt';
 
 
 export const LoginForm: React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPass] = useState<string>('');
+  const [confirmPass, setConfirmPass] = useState<string>('');
+  const [register, setRegister] = useState<boolean>(false);
+  const [titleText, setText] = useState<string>('');
+
+  const handleTitleText = (): string => {
+    if(register) return 'Register an account';
+    else return 'Sign in to your account'
+  }
 
   const handleSignin = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log('button was press');
+  }
+
+  const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setRegister(!register);
+  }
+
+  const handleConfirmRegister = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    console.log('hitting handleConfirm');
   }
 
 
@@ -31,14 +52,27 @@ export const LoginForm: React.FC = () => {
         </a>
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl dark:text-white">
-            Sign in to your account
+            {handleTitleText()}
           </h1>
           <form className="w-4/5 mx-auto space-y-4 md:space-y-6" action="#">
             <EmailBox setEmail={setEmail} />
             <PasswordBox setPass={setPass} />
-            <Signin onButtonClick={handleSignin}/>
-            <Signup />
-            <ForgotPassword />
+            {
+              register &&
+              <div className='mx-auto space-y-4 md:space-y-4'>
+                <ConfirmPass setConfirmPass={setConfirmPass} />
+                <ConfirmRegister onButtonClick={handleConfirmRegister} />
+                <SignInPrompt onButtonClick={handlePrompt} />
+              </div>
+            }
+            {
+              !register &&
+              <div className='mx-auto space-y-4 md:space-y-4'>
+                <Signin onButtonClick={handleSignin} />
+                <SignUpPrompt onButtonClick={handlePrompt} />
+                <ForgotPassword />
+              </div>
+            }
           </form>
         </div>
       </div>
