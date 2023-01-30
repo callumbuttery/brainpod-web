@@ -13,6 +13,11 @@ import { Fail } from '../Alerts/Fail';
 
 import axios from 'axios';
 
+interface LoginDetails {
+  email: string;
+  password: string;
+}
+
 export const LoginForm: React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
@@ -20,20 +25,29 @@ export const LoginForm: React.FC = () => {
   const [confirmPass, setConfirmPass] = useState<string>('');
   const [register, setRegister] = useState<boolean>(false);
   const [alertText, setText] = useState<string>('');
-  const [LoggedIn, setLogin] = useState<boolean>(true);
+  const [LoggedIn, setLogin] = useState<boolean>(false);
 
   const handleTitleText = (): string => {
-    if(register) return 'Register an account';
+    if (register) return 'Register an account';
     else return 'Sign in to your account'
   }
 
   const handleSignin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    console.log('button was press');
-    const loginAttempt = await axios.get('http://localhost:4000/hello')
 
-    if(loginAttempt.status == 200) setLogin(true);
-    else {setLogin(false); setText('Failed to login')};
+    try {
+      await axios.post<LoginDetails>('http://localhost:4000/hello', {
+        data: {
+          email,
+          password
+        }
+      })
+
+      console.log('hitting 1');
+    } catch {
+
+      console.log('hitting 2');
+    }
   }
 
   const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,10 +94,8 @@ export const LoginForm: React.FC = () => {
                 <ForgotPassword />
               </div>
             }
-            {
-              !LoggedIn &&
-              <Fail text={alertText}/>
-            }
+
+            <Fail text={alertText} show={LoggedIn} />
           </form>
         </div>
       </div>

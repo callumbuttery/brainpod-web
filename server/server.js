@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const port = 4000;
 
+app.use(express.json());
 app.listen(port);
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -11,8 +12,7 @@ app.use(cors({
 }));
 
 
-
 console.warn('BrainPod server started on port ', port);
 
 
-app.get('/hello', require('./api/login/get'));
+app.post('/hello', require('./api/Login/post'));
