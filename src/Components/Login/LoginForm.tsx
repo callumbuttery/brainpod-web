@@ -30,6 +30,8 @@ export const LoginForm: React.FC = () => {
     event.preventDefault();
     console.log('button was press');
     const data = await axios.get('http://localhost:4000/hello')
+
+    console.log('data: ', data);
   }
 
   const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
