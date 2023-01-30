@@ -9,9 +9,9 @@ import React, { useState } from 'react';
 import { ConfirmPass } from '../SearchBoxes/ConfirmPass';
 import { ConfirmRegister } from '../Buttons/confirmRegister';
 import { SignInPrompt } from '../Buttons/SignInPrompt';
+import { Fail } from '../Alerts/Fail';
 
 import axios from 'axios';
-
 
 export const LoginForm: React.FC = () => {
 
@@ -19,7 +19,8 @@ export const LoginForm: React.FC = () => {
   const [password, setPass] = useState<string>('');
   const [confirmPass, setConfirmPass] = useState<string>('');
   const [register, setRegister] = useState<boolean>(false);
-  const [titleText, setText] = useState<string>('');
+  const [alertText, setText] = useState<string>('');
+  const [LoggedIn, setLogin] = useState<boolean>(true);
 
   const handleTitleText = (): string => {
     if(register) return 'Register an account';
@@ -29,9 +30,10 @@ export const LoginForm: React.FC = () => {
   const handleSignin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log('button was press');
-    const data = await axios.get('http://localhost:4000/hello')
+    const loginAttempt = await axios.get('http://localhost:4000/hello')
 
-    console.log('data: ', data);
+    if(loginAttempt.status == 200) setLogin(true);
+    else {setLogin(false); setText('Failed to login')};
   }
 
   const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -77,6 +79,10 @@ export const LoginForm: React.FC = () => {
                 <SignUpPrompt onButtonClick={handlePrompt} />
                 <ForgotPassword />
               </div>
+            }
+            {
+              !LoggedIn &&
+              <Fail text={alertText}/>
             }
           </form>
         </div>
