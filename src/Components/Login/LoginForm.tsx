@@ -10,6 +10,8 @@ import { ConfirmPass } from '../SearchBoxes/ConfirmPass';
 import { ConfirmRegister } from '../Buttons/confirmRegister';
 import { SignInPrompt } from '../Buttons/SignInPrompt';
 
+import axios from 'axios';
+
 
 export const LoginForm: React.FC = () => {
 
@@ -24,9 +26,10 @@ export const LoginForm: React.FC = () => {
     else return 'Sign in to your account'
   }
 
-  const handleSignin = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSignin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     console.log('button was press');
+    const data = await axios.get('http://localhost:4000/hello')
   }
 
   const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
