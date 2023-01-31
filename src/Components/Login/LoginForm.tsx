@@ -26,6 +26,7 @@ export const LoginForm: React.FC = () => {
   const [register, setRegister] = useState<boolean>(false);
   const [alertText, setText] = useState<string>('');
   const [LoggedIn, setLogin] = useState<boolean>(false);
+  let [LogInAttempts, setLoginAttempts] = useState<number>(0);
 
   const handleTitleText = (): string => {
     if (register) return 'Register an account';
@@ -34,6 +35,7 @@ export const LoginForm: React.FC = () => {
 
   const handleSignin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    setLoginAttempts(LogInAttempts++);
 
     try {
       await axios.post<LoginDetails>('http://localhost:4000/hello', {
@@ -43,10 +45,8 @@ export const LoginForm: React.FC = () => {
         }
       })
 
-      console.log('hitting 1');
     } catch {
-
-      console.log('hitting 2');
+      setLogin(false);
     }
   }
 
@@ -94,8 +94,9 @@ export const LoginForm: React.FC = () => {
                 <ForgotPassword />
               </div>
             }
-
-            <Fail text={alertText} show={LoggedIn} />
+            { !LoggedIn && LogInAttempts > 0 &&
+              <Fail text={alertText} />
+            }
           </form>
         </div>
       </div>
