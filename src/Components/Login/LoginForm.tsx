@@ -46,6 +46,7 @@ export const LoginForm: React.FC = () => {
       })
 
     } catch {
+      setText('Failed to login')
       setLogin(false);
     }
   }
