@@ -53,6 +53,7 @@ export const LoginForm: React.FC = () => {
 
   const handlePrompt = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    setLogin(false);
     setRegister(!register);
   }
 
@@ -95,7 +96,7 @@ export const LoginForm: React.FC = () => {
                 <ForgotPassword />
               </div>
             }
-            { !LoggedIn && LogInAttempts > 0 &&
+            { !LoggedIn && LogInAttempts > 0 && !register &&
               <Fail text={alertText} />
             }
           </form>
