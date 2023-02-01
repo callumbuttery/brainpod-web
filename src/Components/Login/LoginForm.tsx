@@ -5,13 +5,14 @@ import { PasswordBox } from '../SearchBoxes/PasswordBox';
 import { SignUpPrompt } from '../Buttons/SignUpPrompt';
 import { Signin } from '../Buttons/Signin';
 import { ForgotPassword } from '../Buttons/Forgotpassword';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConfirmPass } from '../SearchBoxes/ConfirmPass';
 import { ConfirmRegister } from '../Buttons/confirmRegister';
 import { SignInPrompt } from '../Buttons/SignInPrompt';
 import { Fail } from '../Alerts/Fail';
 
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginDetails {
   email: string;
@@ -27,6 +28,14 @@ export const LoginForm: React.FC = () => {
   const [alertText, setText] = useState<string>('');
   const [LoggedIn, setLogin] = useState<boolean>(false);
   let [LogInAttempts, setLoginAttempts] = useState<number>(0);
+  let [redirectTo, setRedirect] = useState<string>('');
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(redirectTo) {
+      navigate(redirectTo)
+    }
+  }, [redirectTo])
 
   const handleTitleText = (): string => {
     if (register) return 'Register an account';
@@ -44,6 +53,7 @@ export const LoginForm: React.FC = () => {
           password
         }
       })
+      setRedirect('/home');
 
     } catch {
       setText('Failed to login')
