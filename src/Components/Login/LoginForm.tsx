@@ -27,8 +27,8 @@ export const LoginForm: React.FC = () => {
   const [register, setRegister] = useState<boolean>(false);
   const [alertText, setText] = useState<string>('');
   const [LoggedIn, setLogin] = useState<boolean>(false);
-  let [LogInAttempts, setLoginAttempts] = useState<number>(0);
   let [redirectTo, setRedirect] = useState<string>('');
+  const [showError, toggleError] = useState<boolean>(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -44,7 +44,8 @@ export const LoginForm: React.FC = () => {
 
   const handleSignin = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setLoginAttempts(LogInAttempts++);
+
+    toggleError(false);
 
     try {
       await axios.post<LoginDetails>('http://localhost:4000/hello', {
@@ -56,7 +57,8 @@ export const LoginForm: React.FC = () => {
       setRedirect('/home');
 
     } catch {
-      setText('Username or password incorrect')
+      toggleError(true);
+      setText('Username or password incorrect');
       setLogin(false);
     }
   }
@@ -106,7 +108,7 @@ export const LoginForm: React.FC = () => {
                 <ForgotPassword />
               </div>
             }
-            { !LoggedIn && LogInAttempts > 0 && !register &&
+            { !LoggedIn && showError && !register &&
               <Fail text={alertText} />
             }
           </form>
