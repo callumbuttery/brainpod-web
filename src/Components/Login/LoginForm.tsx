@@ -56,7 +56,7 @@ export const LoginForm: React.FC = () => {
       setRedirect('/home');
 
     } catch {
-      setText('Failed to login')
+      setText('Username or password incorrect')
       setLogin(false);
     }
   }
